@@ -24,7 +24,6 @@ def get_bbox_insightface(faces):
 def detect_face_ins(img):
     ins_detector = FaceAnalysis(providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
     ins_detector.prepare(ctx_id=0, det_size=(640, 640))
-    img = img.convert("RGB")
     faces = ins_detector.get(img)
     embeddings = get_embedding(faces)
     res_faces = get_bbox_insightface(faces)
