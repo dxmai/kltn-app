@@ -45,6 +45,8 @@ if run and img != '':
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
     res_img, labels = draw_boundingbox(res_face, ['test'] * len(res_face))
+    st.image(res_img, output_format="JPEG")
+    st.write(labels)
 else:
     st.write("")
 
