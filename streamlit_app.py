@@ -44,8 +44,8 @@ if run and img != '':
     for face in res_face:
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
-    res_img, labels = draw_boundingbox(res_face, ['test'] * len(res_face))
-    st.image(res_img, output_format="JPEG")
+    res_img, labels = draw_boundingbox(img, res_face, ['test'] * len(res_face))
+    st.pyplot(res_img)
     st.write(labels)
 else:
     st.write("")
