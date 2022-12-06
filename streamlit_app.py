@@ -23,7 +23,8 @@ if url != '':
     img = Image.open(BytesIO(response.content))
     show = 1
 elif uploaded_image:
-    img = Image.open(BytesIO(uploaded_image.getvalue()))
+    img = Image.open(uploaded_image)
+    img = np.array(img)
     show = 1
 
 if show:
