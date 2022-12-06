@@ -25,7 +25,6 @@ if url != '':
     show = 1
 elif uploaded_image:
     img = Image.open(BytesIO(uploaded_image.read()))
-    # img = Image.open(uploaded_image)
     img = np.array(img)
     show = 1
 
@@ -35,13 +34,43 @@ if show:
 
 run = st.sidebar.button("Search")
 if run and img != '': 
+    st.subheader("Predict")
     res_face, embedding = detect_face_ins(img)
     st.header(len(res_face))
     for face in res_face:
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
-    st.write("Run")
     st.image(img, output_format="JPEG")
-    # st.write(img.shape, output_format="JPEG")
 else:
-    st.write("No")
+    st.write("")
+
+path = os.getcwd() 
+
+st.subheader("Sample search")
+col1, col2, col3 = st.columns(3)
+with col1:
+    path1 = path + '/images/1.jpg'
+    img1 = Image.open(path1)
+    img1 = img1.resize((250, 250))
+    st.image(img1)
+    st.write(":adult: Vladimir Putin, Xi Jinping")
+    st.write(":date: 4/2/2022")
+    st.write(":ballot_box_with_check: Olympic Opening Ceremony")
+    
+with col2:
+    path2 = path + '/images/2.jpg'
+    img2 = Image.open(path2)
+    img2 = img2.resize((250, 250))
+    st.image(img2)
+    st.write(":adult: Donal Trump")
+    st.write(":date: 3/9/2022")
+    st.write(":ballot_box_with_check: A Speech in Pennyslvania")
+
+with col3:
+    path3 = path + '/images/3.jpg'
+    img3 = Image.open(path3)
+    img3 = img3.resize((250, 250))
+    st.image(img3)
+    st.write(":adult: Joe Biden")
+    st.write(":date: 4/7/2022")
+    st.write(":ballot_box_with_check: Watching Fireworks at White House, US Independence Day")
