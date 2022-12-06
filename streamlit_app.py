@@ -37,7 +37,8 @@ if run and img != '':
     res_face, embedding = detect_face_ins(img)
     st.header(len(res_face))
     for face in res_face:
-        st.image(face, output_format="JPEG")
+        each = get_roi(img, face)
+        st.image(each, output_format="JPEG")
     st.write("Run")
     st.image(img, output_format="JPEG")
     # st.write(img.shape, output_format="JPEG")

@@ -28,3 +28,13 @@ def detect_face_ins(img):
     embeddings = get_embedding(faces)
     res_faces = get_bbox_insightface(faces)
     return res_faces, embeddings
+
+def get_roi(image, coordinates):
+    # Check negative coordinates
+    top = coordinates[0] if coordinates[0] - 5 < 0 else coordinates[0] - 5 
+    bottom = coordinates[1] + 5
+    left = coordinates[2] if coordinates[2] - 5 < 0 else coordinates[2] - 5
+    right = coordinates[3] + 5
+    # roi = image[coordinates[0]-5:coordinates[1]+5, coordinates[2]-5:coordinates[3]+5]
+    roi = image[top:bottom,left:right]
+    return roi
