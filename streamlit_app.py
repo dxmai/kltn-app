@@ -23,7 +23,7 @@ if url != '':
     img = Image.open(BytesIO(response.content))
     show = 1
 elif uploaded_image:
-    img = uploaded_image
+    img = Image.open(uploaded_image)
     show = 1
 
 if show:
@@ -34,5 +34,7 @@ run = st.sidebar.button("Search")
 if run and img != '': 
     res_face, embedding = detect_face_ins(img)
     st.write(len(res_face))
+    for face in res_face:
+        st.image(face)
 else:
     st.write("No")
