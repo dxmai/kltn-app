@@ -34,10 +34,10 @@ if show:
 
 run = st.sidebar.button("Search")
 if run and img != '': 
-    # res_face, embedding = detect_face_ins(img)
-    # st.header(len(res_face))
-    # for face in res_face:
-    #     st.image(face)
+    res_face, embedding = detect_face_ins(img)
+    st.header(len(res_face))
+    for face in res_face:
+        st.image(face)
     st.write("Run")
     st.image(img, output_format="JPEG")
     # st.write(img.shape, output_format="JPEG")
