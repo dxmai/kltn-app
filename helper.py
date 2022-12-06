@@ -50,7 +50,7 @@ def draw_boundingbox(bbox, names):
             index += 1
             continue
         # get coordinates
-        x, y, width, height = result['bbox']
+        x, y, width, height = result
         # create the shape
         rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
         # draw the box
