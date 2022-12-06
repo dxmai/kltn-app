@@ -1,7 +1,6 @@
 import insightface
 from insightface.app import FaceAnalysis
-from insightface.data import get_image as ins_get_image
-
+import matplotlib.pyplot as plt
 
 
 def get_embedding(faces):
@@ -38,3 +37,27 @@ def get_roi(image, coordinates):
     # roi = image[coordinates[0]-5:coordinates[1]+5, coordinates[2]-5:coordinates[3]+5]
     roi = image[top:bottom,left:right]
     return roi
+
+def draw_boundingbox(bbox, names):
+    ax = plt.gca()
+    # plot each box
+    index = 0
+    count = 0 
+    dictionary = {}
+    # Change here
+    for result in bbox:
+        if names[index] == 'Others' or names[index] == 'NotFace':
+            index += 1
+            continue
+        # get coordinates
+        x, y, width, height = result['bbox']
+        # create the shape
+        rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
+        # draw the box
+        ax.add_patch(rect)
+        ax.annotate(count, (x, y), color='white', weight='bold', fontsize=15, ha='center', va='center')
+        dictionary[count] = names[index]
+        index += 1
+        count += 1
+    return ax, dictionary
+        

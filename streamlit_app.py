@@ -7,14 +7,16 @@ from PIL import Image
 from io import BytesIO
 from helper import *
 
+# ====================== Header ======================
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
 st.title("WaW")
 st.write('# Who is that famous person & \n# What\'s the event?')
 
-st.sidebar.write(":open_file_folder: Upload file")
-uploaded_image = st.sidebar.file_uploader("", label_visibility="collapsed")
-st.sidebar.write("or")
-url = st.sidebar.text_input(":globe_with_meridians: Paste URL", '')
+# ====================== Get input image ======================
+st.sidebar.write(":open_file_folder: Tải ảnh lên")
+uploaded_image = st.sidebar.file_uploader("uploader", label_visibility="collapsed")
+st.sidebar.write("hoặc")
+url = st.sidebar.text_input(":globe_with_meridians: Dán URL", '')
 
 show = 0
 img = ''
@@ -28,11 +30,13 @@ elif uploaded_image:
     img = np.array(img)
     show = 1
 
+# ====================== Preview image ======================
 if show:
-    st.sidebar.write("Preview image")
+    st.sidebar.write("Ảnh đã chọn")
     st.sidebar.image(img)
 
-run = st.sidebar.button("Search")
+# ====================== Run model ======================
+run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     st.subheader("Predict")
     res_face, embedding = detect_face_ins(img)
@@ -40,37 +44,37 @@ if run and img != '':
     for face in res_face:
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
-    st.image(img, output_format="JPEG")
+    res_img, labels = draw_boundingbox(res_face, ['test'] * len(res_face))
 else:
     st.write("")
 
+# ====================== Sample Part ======================
 path = os.getcwd() 
-
-st.subheader("Sample search")
-col1, col2, col3 = st.columns(3)
+st.subheader("Một vài sự kiện mẫu")
+col1, col2, col3  = st.columns(3)
 with col1:
     path1 = path + '/images/1.jpg'
     img1 = Image.open(path1)
-    img1 = img1.resize((250, 250))
-    st.image(img1)
+    img1 = img1.resize((300, 250), Image.Resampling.LANCZOS)
+    st.image(img1, output_format="JPEG")
     st.write(":adult: Vladimir Putin, Xi Jinping")
     st.write(":date: 4/2/2022")
-    st.write(":ballot_box_with_check: Olympic Opening Ceremony")
-    
+    st.write(":ballot_box_with_check: Lễ khai mạc Olympic")
+
 with col2:
     path2 = path + '/images/2.jpg'
     img2 = Image.open(path2)
-    img2 = img2.resize((250, 250))
+    img2 = img2.resize((300, 250))
     st.image(img2)
     st.write(":adult: Donal Trump")
     st.write(":date: 3/9/2022")
-    st.write(":ballot_box_with_check: A Speech in Pennyslvania")
+    st.write(":ballot_box_with_check: Một sự kiện ở Pennyslvania")
 
 with col3:
     path3 = path + '/images/3.jpg'
     img3 = Image.open(path3)
-    img3 = img3.resize((250, 250))
+    img3 = img3.resize((300, 250))
     st.image(img3)
     st.write(":adult: Joe Biden")
-    st.write(":date: 4/7/2022")
-    st.write(":ballot_box_with_check: Watching Fireworks at White House, US Independence Day")
+    st.write(":date: 25/8/2022")
+    st.write(":ballot_box_with_check: Một sự kiện vận động Nước Mỹ an toàn hơn ở Maryland")
