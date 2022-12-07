@@ -46,7 +46,7 @@ if run and img != '':
     #     st.image(each, output_format="JPEG")
     # res_img = img
     fig = plt.figure(figsize = (5,5))
-    ax = fig.add_axes([0, 0, 1, 1])
+    ax = fig.add_axes([0, 0, 0, 0])
     labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
     st.write(":adult:", labels)
     plt.imshow(img)
