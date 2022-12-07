@@ -38,27 +38,35 @@ if show:
     st.sidebar.image(img)
 
 # ====================== Load model ======================
-model_path = os.getcwd() + '/model/knn_insight.pickle'
-with open(model_path, "rb") as file:
-    clf = pickle.load(file)
+@st.cache
+def load():
+    model_path = os.getcwd() + '/model/knn_insight.pickle'
+    with open(model_path, "rb") as file:
+        clf = pickle.load(file)
+    dict_path = os.getcwd() + '/model/dict_insight.pickle'
+    with open(dict_path, "rb") as file:
+        dic = pickle.load(file)
+    return clf, dic
 
-dict_path = os.getcwd() + '/model/dict_insight.pickle'
-with open(dict_path, "rb") as file:
-    dic = pickle.load(file)
-    
+clf, dic = load()
 
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
-    st.subheader("Predict")
+    st.subheader("Kết quả")
     res_face, embeddings = detect_face_ins(img)
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
     predicted = []
+    for index in range(5):
+        name = clf.predict(np.random.rand(1, 512))
+        st.write(name)
+        predicted.append(dic[name[0]])
+    st.write(predicted)
     for embedding in embeddings:
         name = clf.predict(embedding)
         predicted.append(dic[name[0]])
-    labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
+    labels = draw_boundingbox(ax, res_face, predicted)
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
     st.write(":adult:", string)
