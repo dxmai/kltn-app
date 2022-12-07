@@ -38,9 +38,7 @@ def get_roi(image, coordinates):
     roi = image[top:bottom,left:right]
     return roi
 
-def draw_boundingbox(img, bbox, names):
-    plt.imshow(img)
-    ax = plt.gca()
+def draw_boundingbox(ax, bbox, names):
     # plot each box
     index = 0
     count = 0 
