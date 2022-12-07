@@ -48,7 +48,8 @@ if run and img != '':
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
     labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
-    st.write(":adult:", *labels, sep="; ")
+    string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
+    st.write(":adult:", string)
     plt.imshow(img)
     plt.axis('off')
     st.pyplot(fig)
