@@ -58,11 +58,11 @@ if run and img != '':
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
     predicted = []
-    for index in range(5):
-        name = clf.predict(np.random.rand(1, 512))
-        st.write(name)
-        predicted.append(dic[name[0]])
-    st.write(predicted)
+    # for index in range(5):
+    #     name = clf.predict(np.random.rand(1, 512))
+    #     st.write(name)
+    #     predicted.append(dic[name[0]])
+    # st.write(predicted)
     for embedding in embeddings:
         name = clf.predict(embedding)
         predicted.append(dic[name[0]])
