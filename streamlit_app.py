@@ -6,6 +6,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 from helper import *
+import matplotlib.pyplot as plt
 
 # ====================== Header ======================
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
@@ -40,13 +41,16 @@ run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     st.subheader("Predict")
     res_face, embedding = detect_face_ins(img)
-    st.header(len(res_face))
     for face in res_face:
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
     res_img, labels = draw_boundingbox(img, res_face, ['test'] * len(res_face))
-    st.pyplot(res_img)
-    st.write(labels)
+    st.write(":adult:", labels)
+    res_img = img
+    fig = plt.figure(figsize=(5,5))
+    plt.imshow(res_img)
+    plt.axis('off')
+    st.pyplot(fig)
 else:
     st.write("")
 
