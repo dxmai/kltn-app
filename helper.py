@@ -1,6 +1,7 @@
 import insightface
 from insightface.app import FaceAnalysis
 import matplotlib.pyplot as plt
+import streamlit as st
 
 
 def get_embedding(faces):
@@ -36,7 +37,7 @@ def get_roi(coordinates):
     left = coordinates[2] if coordinates[2] - 5 < 0 else coordinates[2] - 5
     right = coordinates[3] + 5
     # roi = image[coordinates[0]-5:coordinates[1]+5, coordinates[2]-5:coordinates[3]+5]
-    return top, bottom, left, right
+    return top, bottom, right - left, bottom - top
 
 def draw_boundingbox(ax, bbox, names):
     # plot each box
@@ -50,6 +51,7 @@ def draw_boundingbox(ax, bbox, names):
             continue
         # get coordinates
         x, y, width, height = get_roi(result)
+        st.write(x, y, width, height)
         # create the shape
         rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
         # draw the box
