@@ -52,7 +52,7 @@ clf, dic = load()
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
-    with st.spinner:
+    with st.spinner("Vui lòng chờ một chút..."):
         res_face, embeddings = detect_face_ins(img)
         fig = plt.figure(figsize = (5,5))
         ax = fig.add_axes([0, 0, 1, 1])
