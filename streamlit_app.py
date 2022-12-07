@@ -37,8 +37,7 @@ if show:
     st.sidebar.write("Ảnh đã chọn")
     st.sidebar.image(img)
 
-# ====================== Load model ======================
-# @st.cache
+# ====================== Load additional ======================
 def load():
     model_path = os.getcwd() + '/model/knn_insight.pickle'
     with open(model_path, "rb") as file:
@@ -53,21 +52,18 @@ clf, dic = load()
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
+    with st.spinner:
+        res_face, embeddings = detect_face_ins(img)
+        fig = plt.figure(figsize = (5,5))
+        ax = fig.add_axes([0, 0, 1, 1])
+        predicted = []
+        for embedding in embeddings:
+            embedding = embedding.reshape(-1, 512)
+            name = clf.predict(embedding)
+            predicted.append(dic[name[0]])
+        labels = draw_boundingbox(ax, res_face, predicted)
+    st.success("Tìm kiếm hoàn tất! :tada:")
     st.subheader("Kết quả")
-    res_face, embeddings = detect_face_ins(img)
-    fig = plt.figure(figsize = (5,5))
-    ax = fig.add_axes([0, 0, 1, 1])
-    predicted = []
-    # for index in range(5):
-    #     name = clf.predict(np.random.rand(1, 512))
-    #     st.write(name)
-    #     predicted.append(dic[name[0]])
-    # st.write(predicted)
-    for embedding in embeddings:
-        embedding = embedding.reshape(-1, 512)
-        name = clf.predict(embedding)
-        predicted.append(dic[name[0]])
-    labels = draw_boundingbox(ax, res_face, predicted)
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
     st.write(":adult:", string)
@@ -84,7 +80,7 @@ with col1:
     img1 = Image.open(path1)
     img1 = img1.resize((300, 250), Image.Resampling.LANCZOS)
     st.image(img1, output_format="JPEG")
-    st.write(":adult: Vladimir Putin, Xi Jinping")
+    st.write(":adult: Vladimir Putin, Tập Cận Bình")
     st.write(":date: 4/2/2022")
     st.write(":ballot_box_with_check: Lễ khai mạc Olympic")
 
