@@ -14,10 +14,10 @@ def get_embedding(faces):
 def get_bbox_insightface(faces):
     res_faces = []
     for index in range(len(faces)):
-        res = faces[index]['bbox']
-        # res = tuple(faces[index]['bbox'])
-        # res = tuple(map(round, res))
-        # res = (max(res[1],0), max(res[3],0), max(res[0], 0), max(res[2],0))
+        # res = faces[index]['bbox']
+        res = tuple(faces[index]['bbox'])
+        res = tuple(map(round, res))
+        res = (max(res[1],0), max(res[3],0), max(res[0], 0), max(res[2],0))
         res_faces.append(res)
     return res_faces
 

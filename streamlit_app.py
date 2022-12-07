@@ -41,9 +41,9 @@ run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     st.subheader("Predict")
     res_face, embedding = detect_face_ins(img)
-    for face in res_face:
-        each = get_roi(img, face)
-        st.image(each, output_format="JPEG")
+    # for face in res_face:
+    #     each = get_roi(img, face)
+    #     st.image(each, output_format="JPEG")
     # res_img = img
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
