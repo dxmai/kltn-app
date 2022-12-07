@@ -64,9 +64,9 @@ if run and img != '':
     #     predicted.append(dic[name[0]])
     # st.write(predicted)
     for embedding in embeddings:
-        st.write(embedding.shape)
-        # name = clf.predict(embedding)
-        # predicted.append(dic[name[0]])
+        embedding = embedding.reshape(-1, 512)
+        name = clf.predict(embedding)
+        predicted.append(dic[name[0]])
     labels = draw_boundingbox(ax, res_face, predicted)
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
