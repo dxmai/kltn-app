@@ -9,7 +9,7 @@ def get_embedding(faces):
     for index in range(len(faces)):
         embedding = faces[index]['embedding']
         embedding = embedding.reshape(-1, 1)
-        embeddings.append(embeddings)
+        embeddings.append(embedding)
     return embeddings
 
 def get_bbox_insightface(faces):
