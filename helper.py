@@ -58,5 +58,5 @@ def draw_boundingbox(ax, bbox, names):
         dictionary[count] = names[index]
         index += 1
         count += 1
-    return ax, dictionary
+    return dictionary
         

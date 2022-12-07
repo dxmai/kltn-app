@@ -47,9 +47,9 @@ if run and img != '':
     # res_img = img
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
-    res_img, labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
+    labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
     st.write(":adult:", labels)
-    plt.imshow(res_img)
+    plt.imshow(fig)
     plt.axis('off')
     st.pyplot(fig)
 else:
