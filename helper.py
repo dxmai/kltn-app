@@ -51,7 +51,6 @@ def draw_boundingbox(ax, bbox, names):
             continue
         # get coordinates
         x, y, width, height = get_roi(result)
-        st.write(x, y, width, height)
         # create the shape
         rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
         # draw the box
