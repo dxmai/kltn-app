@@ -7,6 +7,7 @@ from PIL import Image
 from io import BytesIO
 from helper import *
 import matplotlib.pyplot as plt
+import pickle
 
 # ====================== Header ======================
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
@@ -36,17 +37,27 @@ if show:
     st.sidebar.write("Ảnh đã chọn")
     st.sidebar.image(img)
 
+# ====================== Load model ======================
+model_path = os.getcwd() + '/model/knn_insight.pickle'
+with open(model_path, "rb") as file:
+    clf = pickle.load(file)
+
+dict_path = os.getcwd() + '/model/dict_insight.pickle'
+with open(dict_path, "rb") as file:
+    dic = pickle.load(file)
+    
+
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     st.subheader("Predict")
-    res_face, embedding = detect_face_ins(img)
-    # for face in res_face:
-    #     each = get_roi(img, face)
-    #     st.image(each, output_format="JPEG")
-    # res_img = img
+    res_face, embeddings = detect_face_ins(img)
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
+    predicted = []
+    for embedding in embeddings:
+        name = clf.predict(embedding)
+        predicted.append(dic[name[0]])
     labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
@@ -54,8 +65,6 @@ if run and img != '':
     plt.imshow(img)
     plt.axis('off')
     st.pyplot(fig)
-else:
-    st.write("")
 
 # ====================== Sample Part ======================
 path = os.getcwd() 
