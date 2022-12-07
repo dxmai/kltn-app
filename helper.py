@@ -14,10 +14,10 @@ def get_embedding(faces):
 def get_bbox_insightface(faces):
     res_faces = []
     for index in range(len(faces)):
-        res = faces[index]['bbox']
-        # res = tuple(faces[index]['bbox'])
-        # res = tuple(map(round, res))
-        # res = (max(res[1],0), max(res[3],0), max(res[0], 0), max(res[2],0))
+        # res = faces[index]['bbox']
+        res = tuple(faces[index]['bbox'])
+        res = tuple(map(round, res))
+        res = (max(res[1],0), max(res[3],0), max(res[0], 0), max(res[2],0))
         res_faces.append(res)
     return res_faces
 
@@ -29,15 +29,14 @@ def detect_face_ins(img):
     res_faces = get_bbox_insightface(faces)
     return res_faces, embeddings
 
-def get_roi(image, coordinates):
+def get_roi(coordinates):
     # Check negative coordinates
     top = coordinates[0] if coordinates[0] - 5 < 0 else coordinates[0] - 5 
     bottom = coordinates[1] + 5
     left = coordinates[2] if coordinates[2] - 5 < 0 else coordinates[2] - 5
     right = coordinates[3] + 5
     # roi = image[coordinates[0]-5:coordinates[1]+5, coordinates[2]-5:coordinates[3]+5]
-    roi = image[top:bottom,left:right]
-    return roi
+    return top, bottom, left, right
 
 def draw_boundingbox(ax, bbox, names):
     # plot each box
@@ -50,7 +49,7 @@ def draw_boundingbox(ax, bbox, names):
             index += 1
             continue
         # get coordinates
-        x, y, width, height = result
+        x, y, width, height = get_roi(result)
         # create the shape
         rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
         # draw the box
