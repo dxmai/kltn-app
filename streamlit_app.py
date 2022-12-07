@@ -44,12 +44,12 @@ if run and img != '':
     for face in res_face:
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
-    # res_img = img
+    res_img = img
     fig = plt.figure(figsize = (5,5))
     ax = fig.add_axes([0, 0, 1, 1])
     labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
     st.write(":adult:", labels)
-    plt.imshow(fig)
+    plt.imshow(res_img)
     plt.axis('off')
     st.pyplot(fig)
 else:
