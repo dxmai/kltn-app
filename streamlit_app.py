@@ -38,7 +38,7 @@ if show:
     st.sidebar.image(img)
 
 # ====================== Load model ======================
-@st.cache
+# @st.cache
 def load():
     model_path = os.getcwd() + '/model/knn_insight.pickle'
     with open(model_path, "rb") as file:
@@ -64,8 +64,9 @@ if run and img != '':
     #     predicted.append(dic[name[0]])
     # st.write(predicted)
     for embedding in embeddings:
-        name = clf.predict(embedding)
-        predicted.append(dic[name[0]])
+        st.write(embedding.shape)
+        # name = clf.predict(embedding)
+        # predicted.append(dic[name[0]])
     labels = draw_boundingbox(ax, res_face, predicted)
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
