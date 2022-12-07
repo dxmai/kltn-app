@@ -37,7 +37,7 @@ def get_roi(coordinates):
     left = coordinates[2] if coordinates[2] - 5 < 0 else coordinates[2] - 5
     right = coordinates[3] + 5
     # roi = image[coordinates[0]-5:coordinates[1]+5, coordinates[2]-5:coordinates[3]+5]
-    return left, right, abs(right - left), abs(bottom - top)
+    return left, top, abs(right - left), abs(bottom - top)
 
 def draw_boundingbox(ax, bbox, names):
     # plot each box
