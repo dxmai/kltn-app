@@ -45,7 +45,8 @@ if run and img != '':
         each = get_roi(img, face)
         st.image(each, output_format="JPEG")
     # res_img = img
-    fig, ax = plt.subplots(figsize = (5,5))
+    fig = plt.figure(figsize = (5,5))
+    ax = fig.add_axes()
     res_img, labels = draw_boundingbox(ax, res_face, ['test'] * len(res_face))
     st.write(":adult:", labels)
     plt.imshow(res_img)
