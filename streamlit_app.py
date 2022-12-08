@@ -11,15 +11,18 @@ import pickle
 import cv2
 import subprocess
 
+@st.cache
+def install():
+    subprocess.run(["python3", "-m", "pip", "install", "paddlepaddle"])
+    subprocess.run(["python3", "-m", "pip", "install", "opencv-python"])
+    subprocess.run(["python3", "-m", "pip", "install", "tqdm"])
+    subprocess.run(["python3", "-m", "pip", "install", "pyyaml"])
+    subprocess.run(["python3", "-m", "pip", "install", "sklearn==0.0"])
+
+install()
+
 
 # ====================== Header ======================
-subprocess.run(["python3", "-m", "pip", "install", "paddlepaddle"])
-subprocess.run(["python3", "-m", "pip", "install", "opencv-python"])
-subprocess.run(["python3", "-m", "pip", "install", "tqdm"])
-subprocess.run(["python3", "-m", "pip", "install", "pyyaml"])
-subprocess.run(["python3", "-m", "pip", "install", "sklearn==0.0"])
-
-
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
 st.title("WaW")
 st.write('# Who is that famous person & \n# What\'s the event?')
