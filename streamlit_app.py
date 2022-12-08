@@ -59,15 +59,15 @@ run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     with st.spinner("Vui lòng chờ một chút..."):
         # ====================== Face Dectection and Recognition ======================
-        res_face, embeddings = detect_face_ins(img)
-        fig = plt.figure(figsize = (5,5))
-        ax = fig.add_axes([0, 0, 1, 1])
-        predicted = []
-        for embedding in embeddings:
-            embedding = embedding.reshape(-1, 512)
-            name = clf.predict(embedding)
-            predicted.append(dic[name[0]])
-        labels = draw_boundingbox(ax, res_face, predicted)
+        # res_face, embeddings = detect_face_ins(img)
+        # fig = plt.figure(figsize = (5,5))
+        # ax = fig.add_axes([0, 0, 1, 1])
+        # predicted = []
+        # for embedding in embeddings:
+        #     embedding = embedding.reshape(-1, 512)
+        #     name = clf.predict(embedding)
+        #     predicted.append(dic[name[0]])
+        # labels = draw_boundingbox(ax, res_face, predicted)
 
         # ====================== Matting ======================
         # Save image to get matting input
@@ -89,13 +89,14 @@ if run and img != '':
 
     st.subheader("Kết quả")
     st.image(background)
+    
 
-    string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
-    string = "; ".join(string)
-    st.write(":adult:", string)
-    plt.imshow(img)
-    plt.axis('off')
-    st.pyplot(fig)
+    # string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
+    # string = "; ".join(string)
+    # st.write(":adult:", string)
+    # plt.imshow(img)
+    # plt.axis('off')
+    # st.pyplot(fig)
 
 # ====================== Sample Part ======================
 st.subheader("Một vài sự kiện mẫu")

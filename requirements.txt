@@ -4,9 +4,7 @@ matplotlib==3.6.2
 numpy==1.23.5
 onnxruntime-gpu==1.13.1
 insightface==0.7
-opencv-python
 tqdm
-paddlepaddle
 pyyaml
 visualdl>=2.2.0
 filelock
