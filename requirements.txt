@@ -9,4 +9,4 @@ visualdl>=2.2.0
 filelock
 scipy
 prettytable
-sklearn==0.0
+
