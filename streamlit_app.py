@@ -7,7 +7,9 @@ from PIL import Image
 from io import BytesIO
 from helper import *
 import matplotlib.pyplot as plt
-import pickle
+import pickle 
+import cv2
+
 
 # ====================== Header ======================
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
@@ -52,24 +54,29 @@ clf, dic = load()
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
-    with st.spinner("Vui lòng chờ một chút..."):
-        res_face, embeddings = detect_face_ins(img)
-        fig = plt.figure(figsize = (5,5))
-        ax = fig.add_axes([0, 0, 1, 1])
-        predicted = []
-        for embedding in embeddings:
-            embedding = embedding.reshape(-1, 512)
-            name = clf.predict(embedding)
-            predicted.append(dic[name[0]])
-        labels = draw_boundingbox(ax, res_face, predicted)
-    st.success("Tìm kiếm hoàn tất! :tada:")
+    source_img = 'test.jpg'
+    des_img = str(os.getcwd) + "background.jpg"
+    cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
+    os.system('python seg_demo.py --config inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml --img_path {source_img} --save_dir {des_img}')
+    # with st.spinner("Vui lòng chờ một chút..."):
+    #     res_face, embeddings = detect_face_ins(img)
+    #     fig = plt.figure(figsize = (5,5))
+    #     ax = fig.add_axes([0, 0, 1, 1])
+    #     predicted = []
+    #     for embedding in embeddings:
+    #         embedding = embedding.reshape(-1, 512)
+    #         name = clf.predict(embedding)
+    #         predicted.append(dic[name[0]])
+    #     labels = draw_boundingbox(ax, res_face, predicted)
     st.subheader("Kết quả")
-    string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
-    string = "; ".join(string)
-    st.write(":adult:", string)
-    plt.imshow(img)
-    plt.axis('off')
-    st.pyplot(fig)
+    st.image(source_img, output_format="JPEG")
+    st.image(des_img, output_format="JPEG")
+    # string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
+    # string = "; ".join(string)
+    # st.write(":adult:", string)
+    # plt.imshow(img)
+    # plt.axis('off')
+    # st.pyplot(fig)
 
 # ====================== Sample Part ======================
 path = os.getcwd() 
