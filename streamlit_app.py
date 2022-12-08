@@ -15,6 +15,9 @@ import subprocess
 # ====================== Header ======================
 subprocess.run(["python3", "-m", "pip", "install", "paddlepaddle"])
 subprocess.run(["python3", "-m", "pip", "install", "opencv-python"])
+subprocess.run(["python3", "-m", "pip", "install", "tqdm"])
+subprocess.run(["python3", "-m", "pip", "install", "pyyaml"])
+
 
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
 st.title("WaW")
