@@ -79,7 +79,7 @@ if run and img != '':
     with st.spinner("Vui lòng chờ một chút..."):
         # ====================== Face Dectection and Recognition ======================
         res_face, embeddings = detect_face_ins(img)
-        fig = plt.figure(figsize = (12, 8))
+        fig = plt.figure(figsize = (5, 5))
         ax = fig.add_axes([0, 0, 1, 1])
         predicted = []
         for embedding in embeddings:
