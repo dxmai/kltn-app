@@ -109,7 +109,7 @@ if run and img != '':
         # ===== Extract original image =====
         # Histogram region
         histogram_region = get_region_histogram(img)
-        st.write(histogram_region.shape)
+        # st.write(histogram_region.shape)
 
         # # MobileNet
         # mobile_net = get_mobilenet(img)
