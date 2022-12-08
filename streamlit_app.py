@@ -94,8 +94,20 @@ if run and img != '':
         res = Image.open(des_img)
         res = np.array(res)
         background = np.where(res==254, img, 0)
-        histogram_region = get_region_histogram(background)
+        
+        # ====================== Extract original image ======================
+        # Histogram region
+        histogram_region = get_region_histogram(img)
         st.write(histogram_region.shape)
+        # MobileNet
+        mobile_net = get_mobilenet(img)
+        mobile_net = mobile_net.reshape(mobile_net.shape[0], mobile_net.shape[1] * mobile_net.shape[2] * mobile_net.shape[3])
+        st.write(mobile_net.shape)
+        total = np.concatenate((histogram_region, mobile_net), axis=None)
+        total = total.reshape(1, -1)
+        st.write(total.shape)
+        # ====================== Extract background image ======================
+
 
         # ====================== Event Classification ======================
 

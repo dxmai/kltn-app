@@ -9,4 +9,5 @@ visualdl>=2.2.0
 filelock
 scipy
 prettytable
+tensorflow
 

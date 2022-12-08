@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import tensorflow as tf
 
 def CalHistogram(img, bin=[8,8,8]):
     hist = cv2.calcHist([img],[0, 1, 2],None,[bin[0], bin[1], bin[2]],[0,256, 0, 256, 0, 256])
@@ -38,3 +39,15 @@ def get_region_histogram(img, rows=3, columns=3):
     features = np.array(features)
     features = features.reshape(1, -1)
     return features
+
+def get_mobilenet(img):
+    IMAGE_DIMS = (160, 160, 3)
+    mnet_model = tf.keras.applications.mobilenet_v2.MobileNetV2(input_shape=IMAGE_DIMS,
+                                               include_top=False, weights='imagenet')
+    img=cv2.resize(img, (IMAGE_DIMS[1], IMAGE_DIMS[0]))
+    im_toarray = tf.keras.preprocessing.image.img_to_array(img)
+    im_toarray = np.expand_dims(img, axis=0)
+    im_toarray = tf.keras.applications.mobilenet.preprocess_input(im_toarray)
+    data_stack = np.vstack([im_toarray]) 
+    feature = mnet_model.predict(data_stack)
+    return feature
