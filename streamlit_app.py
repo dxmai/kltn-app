@@ -11,6 +11,11 @@ import pickle
 import cv2
 import subprocess
 
+# ====================== Header ======================
+st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
+st.title("WaW")
+st.write('# Who is that famous person & \n# What\'s the event?')
+
 @st.cache
 def install():
     subprocess.run(["python3", "-m", "pip", "install", "paddlepaddle"])
@@ -20,12 +25,6 @@ def install():
     subprocess.run(["python3", "-m", "pip", "install", "sklearn==0.0"])
 
 install()
-
-
-# ====================== Header ======================
-st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
-st.title("WaW")
-st.write('# Who is that famous person & \n# What\'s the event?')
 
 # ====================== Get input image ======================
 st.sidebar.write(":open_file_folder: Tải ảnh lên")
