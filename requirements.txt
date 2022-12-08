@@ -12,3 +12,4 @@ filelock
 scipy
 prettytable
 sklearn == 0.0
+paddlepaddle
