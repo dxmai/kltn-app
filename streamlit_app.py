@@ -6,6 +6,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 from helper import *
+from feature_exrtractor import *
 import matplotlib.pyplot as plt
 import pickle 
 import cv2
@@ -24,7 +25,7 @@ def install():
     subprocess.run(["python3", "-m", "pip", "install", "pyyaml"])
     subprocess.run(["python3", "-m", "pip", "install", "sklearn==0.0"])
 
-install()
+# install()
 
 # ====================== Get input image ======================
 st.sidebar.write(":open_file_folder: Tải ảnh lên")
@@ -93,6 +94,8 @@ if run and img != '':
         res = Image.open(des_img)
         res = np.array(res)
         background = np.where(res==254, img, 0)
+        histogram_region = get_region_histogram(background)
+        st.write(histogram_region.shape)
 
         # ====================== Event Classification ======================
 
