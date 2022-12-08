@@ -57,31 +57,45 @@ path = os.getcwd()
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
-    source_img = 'test.jpg'
-    des_img = path + "/result/background.jpg"
-    cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
-    subprocess.run(["python", "download_inference_models.py"])
-    subprocess.run(["python", "download_data.py"])
-    subprocess.run(["python", "seg_demo.py", "--config", "inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml", "--img_path", source_img, "--save_dir", des_img])
-    # with st.spinner("Vui lòng chờ một chút..."):
-    #     res_face, embeddings = detect_face_ins(img)
-    #     fig = plt.figure(figsize = (5,5))
-    #     ax = fig.add_axes([0, 0, 1, 1])
-    #     predicted = []
-    #     for embedding in embeddings:
-    #         embedding = embedding.reshape(-1, 512)
-    #         name = clf.predict(embedding)
-    #         predicted.append(dic[name[0]])
-    #     labels = draw_boundingbox(ax, res_face, predicted)
+    with st.spinner("Vui lòng chờ một chút..."):
+        # ====================== Face Dectection and Recognition ======================
+        res_face, embeddings = detect_face_ins(img)
+        fig = plt.figure(figsize = (5,5))
+        ax = fig.add_axes([0, 0, 1, 1])
+        predicted = []
+        for embedding in embeddings:
+            embedding = embedding.reshape(-1, 512)
+            name = clf.predict(embedding)
+            predicted.append(dic[name[0]])
+        labels = draw_boundingbox(ax, res_face, predicted)
+
+        # ====================== Matting ======================
+        # Save image to get matting input
+        source_img = 'query.jpg'
+        cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
+        # Matting result image
+        des_img = path + "/result/matting.jpg"
+
+        subprocess.run(["python", "download_inference_models.py"])
+        subprocess.run(["python", "download_data.py"])
+        subprocess.run(["python", "seg_demo.py", "--config", "inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml", "--img_path", source_img, "--save_dir", des_img])
+    
+        # Get the background
+        res = Image.open(des_img)
+        res = np.array(res)
+        background = np.where(res==254, img, 0)
+
+        # ====================== Event Classification ======================
+
     st.subheader("Kết quả")
-    st.image(source_img, output_format="JPEG")
-    st.image(des_img, output_format="JPEG")
-    # string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
-    # string = "; ".join(string)
-    # st.write(":adult:", string)
-    # plt.imshow(img)
-    # plt.axis('off')
-    # st.pyplot(fig)
+    st.image(background)
+
+    string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
+    string = "; ".join(string)
+    st.write(":adult:", string)
+    plt.imshow(img)
+    plt.axis('off')
+    st.pyplot(fig)
 
 # ====================== Sample Part ======================
 st.subheader("Một vài sự kiện mẫu")
