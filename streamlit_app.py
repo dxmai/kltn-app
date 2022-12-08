@@ -9,6 +9,7 @@ from helper import *
 import matplotlib.pyplot as plt
 import pickle 
 import cv2
+import subprocess
 
 
 # ====================== Header ======================
@@ -59,7 +60,7 @@ if run and img != '':
     source_img = 'test.jpg'
     des_img = path + "/background.jpg"
     cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
-    os.system('python seg_demo.py --config inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml --img_path {source_img} --save_dir {des_img}')
+    subprocess.run(["python", "seg_demo.py", "--config inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml", "--img_path", source_img, "--save_dir", des_img])
     # with st.spinner("Vui lòng chờ một chút..."):
     #     res_face, embeddings = detect_face_ins(img)
     #     fig = plt.figure(figsize = (5,5))
