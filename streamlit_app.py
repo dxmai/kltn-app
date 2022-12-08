@@ -58,7 +58,7 @@ path = os.getcwd()
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     source_img = 'test.jpg'
-    des_img = path + "result/background.jpg"
+    des_img = path + "/result/background.jpg"
     cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
     subprocess.run(["python", "download_inference_models.py"])
     subprocess.run(["python", "download_data.py"])
