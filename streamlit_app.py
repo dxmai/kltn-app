@@ -51,11 +51,13 @@ def load():
 
 clf, dic = load()
 
+path = os.getcwd() 
+
 # ====================== Run model ======================
 run = st.sidebar.button("Dự đoán")
 if run and img != '': 
     source_img = 'test.jpg'
-    des_img = str(os.getcwd) + "background.jpg"
+    des_img = path + "/background.jpg"
     cv2.imwrite(source_img, cv2.cvtColor(img, cv2.COLOR_RGB2BGR)) 
     os.system('python seg_demo.py --config inference_models/portrait_pp_humansegv2_lite_256x144_inference_model_with_softmax/deploy.yaml --img_path {source_img} --save_dir {des_img}')
     # with st.spinner("Vui lòng chờ một chút..."):
@@ -79,7 +81,6 @@ if run and img != '':
     # st.pyplot(fig)
 
 # ====================== Sample Part ======================
-path = os.getcwd() 
 st.subheader("Một vài sự kiện mẫu")
 col1, col2, col3  = st.columns(3)
 with col1:
