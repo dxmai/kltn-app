@@ -13,6 +13,9 @@ import subprocess
 
 
 # ====================== Header ======================
+subprocess.run(["python3", "-m", "pip", "install", "paddlepaddle"])
+subprocess.run(["python3", "-m", "pip", "install", "opencv-python"])
+
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
 st.title("WaW")
 st.write('# Who is that famous person & \n# What\'s the event?')

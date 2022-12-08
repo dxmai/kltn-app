@@ -5,7 +5,7 @@ numpy==1.23.5
 onnxruntime-gpu==1.13.1
 insightface==0.7
 opencv-python-headless
-paddlepaddle==2.3.2
+paddlepaddle
 tqdm
 pyyaml
 visualdl>=2.2.0
