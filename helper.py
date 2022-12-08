@@ -2,8 +2,6 @@ import insightface
 from insightface.app import FaceAnalysis
 import matplotlib.pyplot as plt
 import streamlit as st
-import download_inference_models
-import download_data
 
 def get_embedding(faces):
     embeddings = []
