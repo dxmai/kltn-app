@@ -137,17 +137,17 @@ if run and img != '':
         info = event_info[int(event_label)]
 
 
-    col1, col2  = st.columns(2)
-    with col1:
-        string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
-        string = "; ".join(string)
-        st.write(":adult:", string)
-        st.write(":date:", info['event_date'])
-        st.write(":ballot_box_with_check:", info['event_name'])
-    with col2:
-        plt.imshow(img)
-        plt.axis('off')
-        st.pyplot(fig)
+    # col1, col2  = st.columns(2)
+    # with col1:
+    string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
+    string = "; ".join(string)
+    st.write(":adult:", string)
+    st.write(":date:", info['event_date'])
+    st.write(":ballot_box_with_check:", info['event_name'])
+    # with col2:
+    plt.imshow(img)
+    plt.axis('off')
+    st.pyplot(fig)
 
 # ====================== Sample Part ======================
 st.subheader("Một vài sự kiện mẫu")
