@@ -6,7 +6,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 from helper import *
-from feature_exrtractor import *
+from feature_extractor import *
 import matplotlib.pyplot as plt
 import pickle 
 import cv2
@@ -95,26 +95,40 @@ if run and img != '':
         res = np.array(res)
         background = np.where(res==254, img, 0)
         
-        # ====================== Extract original image ======================
+        # ====================== Event Classification ======================
+
+        # ===== Extract original image =====
         # Histogram region
         histogram_region = get_region_histogram(img)
         st.write(histogram_region.shape)
+
         # MobileNet
         mobile_net = get_mobilenet(img)
         mobile_net = mobile_net.reshape(mobile_net.shape[0], mobile_net.shape[1] * mobile_net.shape[2] * mobile_net.shape[3])
         st.write(mobile_net.shape)
-        total = np.concatenate((histogram_region, mobile_net), axis=None)
-        total = total.reshape(1, -1)
-        st.write(total.shape)
-        # ====================== Extract background image ======================
+
+        # ===== Extract background image =====
+        # Hisrogram RGB
+        hist_rgb = CalHistogram_RGB(background)
+        st.write(hist_rgb.shape)
+
+        # Dominant color
+        number_of_colors = 5
+        dominant_color = get_dominant_color(img, 5)
+        dominant_color = check_color(dominant_color)
+        st.write(dominant_color.shape)
+        
+        # Concatenate
+        event_feature = np.concatenate((histogram_region, mobile_net, hist_rgb, dominant_color), axis=None)
+        event_feature = event_feature.reshape(1, -1)
+        st.write(event_feature.shape)
+
+        # ===== Classifier =====
 
 
-        # ====================== Event Classification ======================
 
     st.subheader("Kết quả")
     st.image(background)
-    
-
     # string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     # string = "; ".join(string)
     # st.write(":adult:", string)
