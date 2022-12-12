@@ -69,9 +69,9 @@ elif uploaded_image:
     show = 1
 
 # ====================== Preview image ======================
-if show:
-    st.sidebar.write("Ảnh đã chọn")
-    st.sidebar.image(img)
+# if show:
+#     st.sidebar.write("Ảnh đã chọn")
+#     st.sidebar.image(img)
 
 # ====================== Run model ======================
 # run = st.sidebar.button("Dự đoán")
