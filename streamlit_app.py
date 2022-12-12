@@ -74,8 +74,8 @@ if show:
     st.sidebar.image(img)
 
 # ====================== Run model ======================
-run = st.sidebar.button("Dự đoán")
-if run and img != '': 
+# run = st.sidebar.button("Dự đoán")
+if img != '': 
     with st.spinner("Vui lòng chờ một chút..."):
         # ====================== Face Dectection and Recognition ======================
         res_face, embeddings = detect_face_ins(img)
