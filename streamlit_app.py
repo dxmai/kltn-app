@@ -14,7 +14,7 @@ import subprocess
 
 # ====================== Header ======================
 st.set_page_config(page_title='Image Search', page_icon=':mag_right:')
-st.title("WaW")
+# st.title("WaW")
 st.write('# Who is that famous person & \n# What\'s the event?')
 
 @st.cache
