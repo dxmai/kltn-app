@@ -145,7 +145,7 @@ if img != '':
         st.write(event_dict)
         st.write(type(event_dict))
         st.write(event_dict[7])
-        get_label = event_dict[event_label]
+        get_label = event_dict[event_label[0]]
         st.write(get_label)
         for event in event_info:
             if event['id'] == get_label:
