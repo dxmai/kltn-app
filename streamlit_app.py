@@ -139,7 +139,7 @@ if img != '':
         
 
         # ===== Classifier =====
-        event_label = event_clf.predict(resnet)
+        event_label = event_clf.predict(histogram_bin)
         info = event_info[int(event_label)]
 
 
