@@ -10,4 +10,5 @@ filelock
 scipy
 prettytable
 tensorflow
-
+torch
+img2vec_pytorch
