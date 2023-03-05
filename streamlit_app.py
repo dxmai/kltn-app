@@ -35,18 +35,18 @@ def load():
     dict_path = os.getcwd() + '/model/face_recognition_dict.pickle'
     with open(dict_path, "rb") as file:
         dic = pickle.load(file)
-    event_path = os.getcwd() + '/even_info/event_dict.pickle'
-    with open(event_path, "rb") as file:
-        event_dict = pickle.load(file)
-    info_path = os.getcwd() + '/even_info/event_info.pickle'
+    # event_path = os.getcwd() + '/even_info/event_dict.pickle'
+    # with open(event_path, "rb") as file:
+    #     event_dict = pickle.load(file)
+    info_path = os.getcwd() + '/even_info/event_info_v1.pickle'
     with open(info_path, "rb") as file:
         event_info = pickle.load(file)
-    event_model_p = os.getcwd() + '/model/knn_event.pickle'
+    event_model_p = os.getcwd() + '/model/knn_event_v1.pickle'
     with open(event_model_p, "rb") as file:
         event_clf = pickle.load(file)
     return clf, dic, event_dict, event_info, event_clf
 
-clf, dic, event_dict, event_info, event_clf = load()
+clf, dic, event_info, event_clf = load()
 
 path = os.getcwd() 
 
@@ -110,7 +110,7 @@ if img != '':
 
         # ===== Extract original image =====
         # Histogram region
-        histogram_region = get_region_histogram(img)
+        # histogram_region = get_region_histogram(img)
         # st.write(histogram_region.shape)
 
         # # MobileNet
@@ -133,9 +133,13 @@ if img != '':
         # event_feature = np.concatenate((histogram_region, mobile_net, hist_rgb, dominant_color), axis=None)
         # event_feature = event_feature.reshape(1, -1)
         # st.write(event_feature.shape)
+        # ===== Resnet =====
+        resnet = get_resnet_embedding(img)
+
+        
 
         # ===== Classifier =====
-        event_label = event_clf.predict(histogram_region)
+        event_label = event_clf.predict(resnet)
         info = event_info[int(event_label)]
 
 

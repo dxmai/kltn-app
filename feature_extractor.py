@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import tensorflow as tf
+from img2vec_pytorch import Img2Vec
 
 def CalHistogram(img, bin=[8,8,8]):
     hist = cv2.calcHist([img],[0, 1, 2],None,[bin[0], bin[1], bin[2]],[0,256, 0, 256, 0, 256])
@@ -85,3 +86,10 @@ def check_color(palette, number_of_colors=5):
         result = np.append(result, [[0, 0, 0]], axis=0)
     result = result.reshape(1, -1)
     return result
+
+def get_resnet_embedding(img):
+    img2vec = Img2Vec(cuda=True)
+    vec = img2vec.get_vec(img, tensor=True)
+    vec = vec.reshape([-1, 1])
+    vec = vec.detach().numpy()
+    return vec
