@@ -4,8 +4,6 @@ import tensorflow as tf
 from img2vec_pytorch import Img2Vec
 
 def CalHistogram(img, bin=[8,8,8]):
-    img = img[:, :, ::-1]
-    img = np.array(img)
     hist = cv2.calcHist([img],[0, 1, 2],None,[bin[0], bin[1], bin[2]],[0,256, 0, 256, 0, 256])
     hist = hist.reshape(1, -1)/ hist.sum()
     return hist
