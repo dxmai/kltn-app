@@ -143,6 +143,8 @@ if img != '':
         event_label = event_clf.predict(histogram_bin)
         st.write(event_label)
         st.write(event_dict)
+        st.write(type(event_dict))
+        st.write(event_dict[7])
         get_label = event_dict[event_label]
         st.write(get_label)
         for event in event_info:
