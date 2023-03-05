@@ -141,7 +141,7 @@ if img != '':
 
         # ===== Classifier =====
         event_label = event_clf.predict(histogram_bin)
-        st.write(event_label)
+        st.write(event_label[0])
         st.write(event_dict)
         st.write(type(event_dict))
         st.write(event_dict[7])
