@@ -133,8 +133,8 @@ if img != '':
         # event_feature = np.concatenate((histogram_region, mobile_net, hist_rgb, dominant_color), axis=None)
         # event_feature = event_feature.reshape(1, -1)
         # st.write(event_feature.shape)
-        # ===== Resnet =====
-        resnet = get_resnet_embedding(img)
+        # ===== Histogram bin =====
+        histogram_bin = CalHistogram(img)
 
         
 
