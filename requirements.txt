@@ -10,5 +10,5 @@ filelock
 scipy
 prettytable
 tensorflow
-torch==1.13.1+cu116
+torch==1.13.1
 img2vec_pytorch
