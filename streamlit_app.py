@@ -146,14 +146,12 @@ if img != '':
                 info = event
 
 
-    # col1, col2  = st.columns(2)
-    # with col1:
     string = ["{}: {}".format(key, value) for key, value in zip(labels.keys(), labels.values())]
     string = "; ".join(string)
     st.write(":adult:", string)
     st.write(":date:", info['event_date'])
     st.write(":ballot_box_with_check:", info['event_name'])
-    # with col2:
+    st.write(":pushpin:", info['event_location'], ", ", info['event_country'])
     plt.imshow(img)
     plt.axis('off')
     st.pyplot(fig)
@@ -169,6 +167,8 @@ with col1:
     st.write(":adult: Kishida Fumio")
     st.write(":date: 15/11/2022")
     st.write(":ballot_box_with_check: Hội nghị G20")
+    st.write(":pushpin: Bali, Indonesia")
+
 
 with col2:
     path2 = path + '/images/2.jpg'
@@ -178,6 +178,7 @@ with col2:
     st.write(":adult: Joe Biden")
     st.write(":date: 18/10/2022")
     st.write(":ballot_box_with_check: Sự kiện của Uỷ ban Quốc gia Đảng Dân chủ")
+    st.write(":pushpin: Washington, Mỹ")
 
 with col3:
     path3 = path + '/images/3.jpg'
@@ -187,3 +188,5 @@ with col3:
     st.write(":adult: Vladimir Putin")
     st.write(":date: 7/9/2022")
     st.write(":ballot_box_with_check: Diễn đàn Kinh tế Phương Đông")
+    st.write(":pushpin: Vladivostok, Nga")
+
