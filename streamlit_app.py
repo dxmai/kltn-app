@@ -62,13 +62,9 @@ if url != '':
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
     img = np.array(img)
-    img = img[:, :, ::-1]
-    img = np.array(img)
     show = 1
 elif uploaded_image:
     img = Image.open(BytesIO(uploaded_image.read()))
-    img = np.array(img)
-    img = img[:, :, ::-1]
     img = np.array(img)
     show = 1
 
