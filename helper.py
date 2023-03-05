@@ -45,18 +45,19 @@ def draw_boundingbox(ax, bbox, names):
     dictionary = {}
     # Change here
     for result in bbox:
-        if names[index] == 'Others' or names[index] == 'NotFace':
+        if index < len(names):
+            if names[index] == 'Others' or names[index] == 'NotFace':
+                index += 1
+                continue
+            # get coordinates
+            x, y, width, height = get_roi(result)
+            # create the shape
+            rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
+            # draw the box
+            ax.add_patch(rect)
+            ax.annotate(count, (x, y), color='white', weight='bold', fontsize=15, ha='center', va='center')
+            dictionary[count] = names[index]
             index += 1
-            continue
-        # get coordinates
-        x, y, width, height = get_roi(result)
-        # create the shape
-        rect = plt.Rectangle((x, y), width, height, fill=False, color='red')
-        # draw the box
-        ax.add_patch(rect)
-        ax.annotate(count, (x, y), color='white', weight='bold', fontsize=15, ha='center', va='center')
-        dictionary[count] = names[index]
-        index += 1
-        count += 1
+            count += 1
     return dictionary
         
