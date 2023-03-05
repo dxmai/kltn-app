@@ -157,24 +157,24 @@ with col1:
     img1 = Image.open(path1)
     img1 = img1.resize((300, 250), Image.Resampling.LANCZOS)
     st.image(img1, output_format="JPEG")
-    st.write(":adult: Vladimir Putin, Tập Cận Bình")
-    st.write(":date: 4/2/2022")
-    st.write(":ballot_box_with_check: Lễ khai mạc Olympic")
+    st.write(":adult: Kishida Fumio")
+    st.write(":date: 15/11/2022")
+    st.write(":ballot_box_with_check: Hội nghị G20")
 
 with col2:
     path2 = path + '/images/2.jpg'
     img2 = Image.open(path2)
     img2 = img2.resize((300, 250))
     st.image(img2)
-    st.write(":adult: Donal Trump")
-    st.write(":date: 3/9/2022")
-    st.write(":ballot_box_with_check: Một sự kiện ở Pennyslvania")
+    st.write(":adult: Joe Biden")
+    st.write(":date: 18/10/2022")
+    st.write(":ballot_box_with_check: Sự kiện của Uỷ ban Quốc gia Đảng Dân chủ")
 
 with col3:
     path3 = path + '/images/3.jpg'
     img3 = Image.open(path3)
     img3 = img3.resize((300, 250))
     st.image(img3)
-    st.write(":adult: Joe Biden")
-    st.write(":date: 25/8/2022")
-    st.write(":ballot_box_with_check: Một sự kiện vận động Nước Mỹ an toàn hơn ở Maryland")
+    st.write(":adult: Vladimir Putin")
+    st.write(":date: 7/9/2022")
+    st.write(":ballot_box_with_check: Diễn đàn Kinh tế Phương Đông")
