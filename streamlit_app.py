@@ -66,7 +66,6 @@ if url != '':
 elif uploaded_image:
     img = Image.open(BytesIO(uploaded_image.read()))
     img = np.array(img)
-    st.write(img)
     show = 1
 
 # ====================== Preview image ======================
