@@ -87,7 +87,8 @@ if img != '':
             name = clf.predict(embedding)
             if dic[name[0]] not in predicted:
                 predicted.append(dic[name[0]])
-        labels = draw_boundingbox(ax, res_face, predicted)
+        if len(predicted) != 0:
+            labels = draw_boundingbox(ax, res_face, predicted)
 
         # ====================== Matting ======================
         # Save image to get matting input
