@@ -85,7 +85,8 @@ if img != '':
         for embedding in embeddings:
             embedding = embedding.reshape(-1, 512)
             name = clf.predict(embedding)
-            predicted.append(dic[name[0]])
+            if dic[name[0]] not in predicted:
+                predicted.append(dic[name[0]])
         labels = draw_boundingbox(ax, res_face, predicted)
 
         # ====================== Matting ======================
