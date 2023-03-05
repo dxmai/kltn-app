@@ -35,18 +35,18 @@ def load():
     dict_path = os.getcwd() + '/model/face_recognition_dict.pickle'
     with open(dict_path, "rb") as file:
         dic = pickle.load(file)
-    # event_path = os.getcwd() + '/even_info/event_dict.pickle'
-    # with open(event_path, "rb") as file:
-    #     event_dict = pickle.load(file)
+    event_path = os.getcwd() + '/even_info/labels_dict.pickle'
+    with open(event_path, "rb") as file:
+        event_dict = pickle.load(file)
     info_path = os.getcwd() + '/even_info/event_info_v1.pickle'
     with open(info_path, "rb") as file:
         event_info = pickle.load(file)
     event_model_p = os.getcwd() + '/model/knn_event_v1.pickle'
     with open(event_model_p, "rb") as file:
         event_clf = pickle.load(file)
-    return clf, dic, event_info, event_clf
+    return clf, dic, event_dict, event_info, event_clf
 
-clf, dic, event_info, event_clf = load()
+clf, dic, event_dict, event_info, event_clf = load()
 
 path = os.getcwd() 
 
@@ -141,7 +141,12 @@ if img != '':
 
         # ===== Classifier =====
         event_label = event_clf.predict(histogram_bin)
-        info = event_info[int(event_label)]
+        st.write(event_label)
+        get_label = event_dict[event_label]
+        st.write(get_label)
+        for event in event_info:
+            if event['id'] == get_label:
+                info = event
 
 
     # col1, col2  = st.columns(2)
