@@ -44,7 +44,7 @@ def load():
     event_model_p = os.getcwd() + '/model/knn_event_v1.pickle'
     with open(event_model_p, "rb") as file:
         event_clf = pickle.load(file)
-    return clf, dic, event_dict, event_info, event_clf
+    return clf, dic, event_info, event_clf
 
 clf, dic, event_info, event_clf = load()
 
