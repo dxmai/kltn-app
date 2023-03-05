@@ -62,6 +62,7 @@ if url != '':
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
     img = np.array(img)
+    st.write(img)
     show = 1
 elif uploaded_image:
     img = Image.open(BytesIO(uploaded_image.read()))
