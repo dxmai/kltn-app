@@ -46,7 +46,7 @@ def draw_boundingbox(ax, bbox, names):
     # Change here
     for result in bbox:
         if index < len(names):
-            if names[index] == 'Others' or names[index] == 'NotFace':
+            if names[index] == 'others' or names[index] == 'NotFace':
                 index += 1
                 continue
             # get coordinates
