@@ -29,10 +29,10 @@ def install():
 
 # ====================== Load additional ======================
 def load():
-    model_path = os.getcwd() + '/model/knn_ver1.pickle'
+    model_path = os.getcwd() + '/model/knn_ver2.pickle'
     with open(model_path, "rb") as file:
         clf = pickle.load(file)
-    dict_path = os.getcwd() + '/model/face_recognition_dict.pickle'
+    dict_path = os.getcwd() + '/model/face_recognition_dict_v2.pickle'
     with open(dict_path, "rb") as file:
         dic = pickle.load(file)
     event_path = os.getcwd() + '/even_info/labels_dict.pickle'
